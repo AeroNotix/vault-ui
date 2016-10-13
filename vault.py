@@ -19,10 +19,12 @@ def __client(token=None):
         client.token = token
     return client
 
-def vault_auth(username,password):
+def vault_auth(username, password, token):
     client = __client()
     if app.config.get('AUTH_BACKEND') == 'ldap':
         client.auth_ldap(username, password)
+    elif app.config.get('AUTH_BACKEND') == 'github':
+        client.auth_github(token)
     else:
         client.auth_userpass(username, password)
     return client.token

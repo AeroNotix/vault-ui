@@ -28,7 +28,7 @@ def index():
 def login():
     if request.method == 'POST':
         try:
-            token = vault_auth(request.form['username'], request.form['password'])
+            token = vault_auth(request.form['username'], request.form['password'], request.form['token'])
             session['vault_token'] = token
             session['username'] = request.form['username']
             return redirect(url_for('index'))
